@@ -31,9 +31,6 @@ public class UserServiceApplicationTests {
     @Autowired
     private RabbitSender rabbitSender;
 
-    @Test
-    public void contextLoads() {
-    }
 
     @Test
     public void test() {
