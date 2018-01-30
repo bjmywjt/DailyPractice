@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Dao 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daily.mapper.AccountMapper">
+    <resultMap id="BaseResultMap" type="com.daily.domain.Account">
+        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="total_money" property="totalMoney" jdbcType="DECIMAL"/>
+        <result column="recharge_money" property="rechargeMoney" jdbcType="DECIMAL"/>
+        <result column="income_money" property="incomeMoney" jdbcType="DECIMAL"/>
+        <result column="principal_money" property="principalMoney" jdbcType="DECIMAL"/>
+        <result column="repayment_money" property="repaymentMoney" jdbcType="DECIMAL"/>
+        <result column="loan_money" property="loanMoney" jdbcType="DECIMAL"/>
+        <result column="loan_netvalue" property="loanNetvalue" jdbcType="DECIMAL"/>
+        <result column="freeze_for_invest" property="freezeForInvest" jdbcType="DECIMAL"/>
+        <result column="freeze_for_cash" property="freezeForCash" jdbcType="DECIMAL"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="user_id_num" property="userIdNum" jdbcType="INTEGER"/>
+        <result column="user_type" property="userType" jdbcType="TINYINT"/>
+        <result column="decimal_money" property="decimalMoney" jdbcType="DECIMAL"/>
+        <result column="bank_account_id" property="bankAccountId" jdbcType="VARCHAR"/>
+        <result column="auto_invest_code" property="autoInvestCode" jdbcType="VARCHAR"/>
+        <result column="auto_asset_buy_code" property="autoAssetBuyCode" jdbcType="VARCHAR"/>
+        <result column="free_cash_limit" property="freeCashLimit" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		user_id, total_money, recharge_money, income_money,
+		principal_money,
+		repayment_money,
+		loan_money,
+		loan_netvalue,
+		freeze_for_invest, freeze_for_cash, type, user_id_num,user_type,decimal_money,bank_account_id,auto_invest_code,auto_asset_buy_code,free_cash_limit
+	</sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from Account
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getOrderInfo" resultType="string">
+        select
+          `for_account_id` id
+        from asset_end_record
+        where seq_no = '112590' and `tx_time` = '001025' and `tx_date` = '20171228';
+    </select>
+</mapper>
