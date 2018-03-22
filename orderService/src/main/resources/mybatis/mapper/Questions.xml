@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Dao 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daily.mapper.QuestionMapper">
+    <resultMap id="BaseResultMap" type="com.daily.domain.Question">
+        <result column="theme_id" property="themeId" jdbcType="INTEGER"/>
+        <result column="question" property="question" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		theme_id, question, answer
+	</sql>
+
+    <insert id="batchInsert" parameterType="list">
+      insert into questions (theme_id, question, answer)
+      VALUES
+      <foreach collection="list" item="item" separator=",">
+          (#{item.themeId,jdbcType=INTEGER} , #{item.question,jdbcType=VARCHAR}, #{item.answer,jdbcType=VARCHAR})
+      </foreach>
+    </insert>
+
+</mapper>
