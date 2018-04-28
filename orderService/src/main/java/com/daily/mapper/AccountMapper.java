@@ -1,5 +1,7 @@
 package com.daily.mapper;
 
+import com.alicp.jetcache.anno.CacheRefresh;
+import com.alicp.jetcache.anno.Cached;
 import com.daily.domain.Account;
 
 /**
@@ -8,6 +10,7 @@ import com.daily.domain.Account;
  **/
 public interface AccountMapper {
 
+    @Cached(expire = 60)
     Account selectByPrimaryKey(String userId);
 
     String getOrderInfo();
