@@ -12,9 +12,17 @@ import java.util.concurrent.*;
  **/
 public class DemoTest {
 
+    /**
+     * 1. 初始化线程池,容量8,并发队列长度8,任务计数器内容8
+     *
+     * 2. 初始化加入模数队列
+     *
+     */
     @Test
     public void test() {
+        // 初始化线程池
         ExecutorService executorService = Executors.newFixedThreadPool(8);
+        // 新建并发任务队列
         final BlockingQueue<Integer> queue = new ArrayBlockingQueue(8);
         // 剩余未完成任务计数器
         final CountDownLatch countDownLatch = new CountDownLatch(8);
@@ -22,7 +30,9 @@ public class DemoTest {
         for (int i = 0; i < 8; i++) {
             queue.offer(i);
         }
+        // 死循环,退出条件是任务计数器为0
         for (;;) {
+            // 如果队列不为空代表有未完成任务,新建线程
             while (!queue.isEmpty()) {
                 executorService.submit(() -> {
                     System.out.println(Thread.currentThread().getName() + "===》开始了");
@@ -47,7 +57,7 @@ public class DemoTest {
                     }
                 });
             }
-
+            if (countDownLatch.getCount() == 0) break;
         }
     }
 }
