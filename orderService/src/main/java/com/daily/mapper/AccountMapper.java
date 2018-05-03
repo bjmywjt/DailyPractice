@@ -1,6 +1,5 @@
 package com.daily.mapper;
 
-import com.alicp.jetcache.anno.CacheRefresh;
 import com.alicp.jetcache.anno.Cached;
 import com.daily.domain.Account;
 
